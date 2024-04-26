@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date</title>
+    
+</head>
+<body>
+    <div class="login-container">
+        <h2 style="text-align: center;">Login</h2>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="button" onclick="login()">Login</button>
+            <a href="forgot.html">Forgot Password?</a>
+        </form>
+        <p id="error-message" class="error-message"></p>
+    </div>
+
+    
+</body>
+<style>
+    body {
+        background-position: top;
+        transition: background-image 1s ease;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .login-container {
+        width: 500px;
+        margin-left: 30%;  <!--added line-->
+        margin: 100px auto;
+        margin-top: 50px;
+        
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        margin-left: 15%;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        width:70%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-left: 15%;
+    }
+
+    button {
+        
+        padding: 10px 20px;
+        background-color: #380af3;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+    }
+
+    button:hover {
+        background-color: #1c83e3;
+    }
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+
+</style>
+<script>
+    function login() {
+    // Get the username and password from the input fields
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Fetch the JSON file containing user data
+    fetch('login.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Check if the provided username and password match any user in the JSON data
+            const user = data.find(user => user.username === username && user.password === password);
+
+            if (user) {
+                // Redirect to the dating.html page if login is successful
+                window.location.href = 'dating.html';
+            } else {
+                // Display an error message or perform any other action for unsuccessful login
+                alert('Invalid username or password. Please try again.');
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+const images = [
+    'mainbackground1.jpg',
+    'OnlineDating1.jpg',
+    
+    // Add more image URLs as needed
+];
+
+// Function to set a random background image
+function setRandomBackground() {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const imageUrl = images[randomIndex];
+    document.body.style.backgroundImage = `url(${imageUrl})`;
+}
+
+// Set an initial background when the page loads
+setRandomBackground();
+
+// Change the background image every 5 seconds (adjust the interval as needed)
+setInterval(setRandomBackground, 2000);
+
+
+</script>
+</html>

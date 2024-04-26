@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Recovery page</title>
+</head>
+<body>
+    <h2>Password Recovery</h2>
+    <form id="recovery-form">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <p id="question-container">
+            <!-- Secret question will be inserted here dynamically -->
+        </p>
+        <p id="anslabel">
+            <!--answerlabel-->
+        </p>
+        <div id="answer-container">
+            <!--input box for the answer-->
+        </div>
+        
+        <button type="button" onclick="getSecretQuestion()" id="getquestionbutton">Get Secret Question</button>
+        <a href="login.html">Back to the Login page</a>
+        <div id="passwordbutton"></div>
+    </form>
+    </form>
+</body>
+
+<script>
+    function getSecretQuestion() {
+    const username = document.getElementById('username').value;
+    
+    fetch('login.json')
+        .then(response =>  {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const user = data.find(user => user.username === username);
+
+
+            if (user) {
+                
+                const questionContainer = document.getElementById('question-container');
+                questionContainer.innerHTML = `<label for="secret_question">${user.secret_question}</label>`;
+                const answercontainer=document.getElementById("answer-container");
+                const answerlabel=document.getElementById("anslabel");
+                answerlabel.innerHTML=`<label for="answer">Answer:</label><input type="text" id="answer" name="answer" >`;
+                const passwordbutton1=document.getElementById("passwordbutton");
+                passwordbutton1.innerHTML=`<button type="button" onclick="recoverPassword()">Recover Password</button>`;
+                const questionbutton1=document.getElementById("getquestionbutton");
+                questionbutton1.remove();
+            } else {
+                document.getElementById('question-container').textContent = 'User not found! Try with a different username.';
+                const usernameInput = document.getElementById('username');
+
+                // Clear the username input field
+                usernameInput.value = '';
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+function recoverPassword() {
+    const username = document.getElementById('username').value;
+    const answer = document.getElementById('answer').value;
+
+    fetch('login.json')
+        .then(response => response.json())
+        .then(data => {
+            const user = data.find(user => user.username === username);
+
+            if (user && user.secret_answer === answer) {
+                alert(`Your password is: ${user.password}`);
+            } else {
+                alert('Incorrect answer or user not found');
+                
+            }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+</script>
+
+<style>
+    body {
+        background-image: url(forgotimage.jpg);
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        margin-left: 8%;
+        margin-bottom: 20px;
+    }
+
+    #recovery-form {
+        width: 25%;
+        margin-left: 43%;
+        margin-right: auto;
+        
+        background-color: rgba(221, 160, 221, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 20px); /* Subtract padding */
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #error-message {
+        color: red;
+        margin-top: 10px;
+    }
+
+</style>
+</html>

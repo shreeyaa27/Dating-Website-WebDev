@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dating App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="blink">Provide details to find a Match!!</h2>
+        <form id="dating-form">
+            <div class="form-group">
+                <label for="roll-number">IITB Roll Number:</label>
+                <input type="text" id="roll-number" name="roll-number" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="year-of-study">Year of Study:</label>
+                <input type="number" id="year-of-study" name="year-of-study" required min="1">
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required min="18">
+            </div>
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="gender">
+                    <input type="radio" id="male" name="gender" value="Male" required>
+                    <label for="male">Male</label>
+                
+                    <input type="radio" id="female" name="gender" value="Female">
+                    <label for="female">Female</label>
+                
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="interests">Interests:</label>
+                <div class="interests1">
+                    <input type="checkbox" id="traveling" name="interests" value="Traveling">
+                    <label for="traveling">Traveling  </label>
+                
+                    <input type="checkbox" id="sports" name="interests" value="Sports">
+                    <label for="sports">Sports  </label>
+                
+                    <input type="checkbox" id="movies" name="interests" value="Movies">
+                    <label for="movies">Movies  </label>
+                
+                    <input type="checkbox" id="music" name="interests" value="Music">
+                    <label for="music">Music </label>
+                
+                    <input type="checkbox" id="literature" name="interests" value="Literature">
+                    <label for="literature">Literature</label>
+                
+                </div >
+                <div class="interests2">
+                    <input type="checkbox" id="technology" name="interests" value="Technology">
+                    <label for="technology">Technology</label>
+                
+                    <input type="checkbox" id="fashion" name="interests" value="Fashion">
+                    <label for="fashion">Fashion</label>
+                
+                    <input type="checkbox" id="art" name="interests" value="Art">
+                    <label for="art">Art</label>
+                </div>
+            
+            </div>
+            <div class="form-group">
+                <label for="hobbies">Hobbies:</label>
+                <div>
+                    <input type="checkbox" id="reading" name="hobbies" value="Reading">
+                    <label for="reading">Reading</label>
+                
+                    <input type="checkbox" id="cooking" name="hobbies" value="Cooking">
+                    <label for="cooking">Cooking</label>
+                
+                    <input type="checkbox" id="coding" name="hobbies" value="Coding">
+                    <label for="coding">Coding</label>
+                
+                    <input type="checkbox" id="gardening" name="hobbies" value="Gardening">
+                    <label for="gardening">Gardening</label>
+                
+                    <input type="checkbox" id="painting" name="hobbies" value="Painting">
+                    <label for="painting">Painting</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="watching" name="hobbies" value="Watching YouTube/Instagram">
+                    <label for="watching">Watching YouTube/Instagram</label>
+                
+                    <input type="checkbox" id="playing" name="hobbies" value="Playing musical instruments">
+                    <label for="playing">Playing musical instruments</label>
+                
+                    <input type="checkbox" id="photography" name="hobbies" value="Photography">
+                    <label for="photography">Photography</label>
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="photo">Photo:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            <button type="submit" onclick="validateForm()">Submit</button> <button id="logout-btn">Logout</button>
+        </form>
+        <div id="match-results"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Display</title>
+</head>
+<body>
+    <div id="found">
+
+    </div>
+    
+    <div id="match-info">
+        <!-- Match information will be displayed here -->
+    </div>
+    
+    <script>
+
+        // Retrieve the match information from local storage or any other source
+        const perfectMatchRaw = localStorage.getItem('perfectMatch');
+        const perfectMatch = perfectMatchRaw !== null ? JSON.parse(perfectMatchRaw) : 0;
+
+        // Check if a perfect match exists
+        if (perfectMatch === 0) {
+            // If no perfect match is found, display a message
+            const matchInfoContainer = document.getElementById('match-info');
+            matchInfoContainer.innerHTML = `<h1 style="color: yellow;" >Sorry, no match found for you...</h1>`;
+            matchInfoContainer.classList.add('no-match-background');
+        } 
+        else {
+            // Populate the HTML with match information
+            const foundcontainer=document.getElementById('found');
+            foundcontainer.innerHTML=`<h1>Hey, you got a match!!</h2>`
+            const matchInfoContainer = document.getElementById('match-info');
+            matchInfoContainer.classList.add('match-background');
+            matchInfoContainer.innerHTML = `
+                <div><p id= "name"> <b>${perfectMatch.Name}</b></p>
+                <p> <b>Roll number:</b> ${perfectMatch["IITB Roll Number"]}</p>
+                <p> <b>Year of Study:</b>  ${perfectMatch["Year of Study"]}</p>
+                <p> <b>Age:</b>  ${perfectMatch.Age}</p>
+                <p> <b>Gender:</b>  ${perfectMatch.Gender}</p>
+                <p> <b>Email:</b>  ${perfectMatch.Email}</p>
+                <p><b>Interests:</b> ${perfectMatch.Interests}</p>
+                <p><b>Hobbies:</b> ${perfectMatch.Hobbies}</p></div>
+                <div class="heart"><img id="match-photo" src="${perfectMatch.Photo}" alt="Match Photo"></div>
+                
+                
+            `;
+        } 
+
+    </script>
+</body>
+<style>
+    body{
+        
+        background-image: url("matchpagebackground.jpg");
+    }
+    @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    h1{
+        text-align: center;
+        font-family:Georgia, 'Times New Roman', Times, serif ;
+        animation: blink 1s infinite;
+        color: #4B1858;
+        
+    }
+    #name{
+        font-size: larger;
+    }
+    #match-info {
+        margin-left: 25%;
+        padding-top: 20px;;
+        padding-left: 40px;
+        font-family:Verdana, Geneva, Tahoma, sans-serif ;
+        color: rgb(13, 23, 135);
+        text-shadow: 2px 2px rgb(195, 121, 132);
+        border-radius: 25px;
+        border: 2px solid #73AD21;
+         
+        width: 50%;
+        display: flex;
+        flex: left;
+        height: 600px;
+        
+
+    }
+    #match-photo{
+        margin-top: 40px;
+        padding-top: 0px;
+        margin-left: 115px;
+        width: 230px;
+        height: 230px;
+        mask:
+        radial-gradient(at 70% 30%,#000 29%,#0000 30%),
+        radial-gradient(at 30% 31%,#000 29%,#0000 30%),
+        linear-gradient(#000 0 0) bottom/100% 50% no-repeat;
+        clip-path: polygon(-41% 0,50% 91%, 141% 0);
+        border: white;
+        
+    }
+
+    
+    .no-match-background {
+        background-image: url("matchnotfound.jpg");
+    }
+    .match-background {
+        background-image: radial-gradient(circle,pink,rgb(181, 29, 105));
+    }
+</style>
+</html>
