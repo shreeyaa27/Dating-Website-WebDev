@@ -1,3 +1,7 @@
+function nextStep() {
+    document.getElementById('detailsForm').style.display = 'none';
+    document.getElementById('hobbiesForm').style.display = 'block';
+}
 function validateForm() {
     // Retrieve form inputs
     const rollNumber = document.getElementById('roll-number').value;

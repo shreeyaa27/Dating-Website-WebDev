@@ -47,8 +47,21 @@ label {
     align-items: center;
     font-size:larger;
 }
+#hobbiesForm {
+    display: none;
+}
+#nextButton{
+    padding: 10px 20px;
+        background-color: #f30a73;
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+        align-self: center;
 
-
+}
 
 button {
     width: 48%;
