@@ -11,6 +11,7 @@
 <body>
 
     <div class="container">
+        
         <div id="step1">
             <h1 class="blink">Provide details to find a Match!!</h2>
                 <form id="dating-form">
@@ -54,9 +55,10 @@
 
                     <button type="button" onclick="nextStep('step1', 'step2')">Next</button>
         </div>
+        
         <div id="step2" style="display: none;">
             <div class="form-group">
-                <label for="interests">Interests:</label>
+                <h2 class="interestslabel"><img src="interest1.png"></h2>
                 <div class="interests1">
                     <input type="checkbox" id="traveling" name="interests" value="Traveling">
                     <label for="traveling"><img class="hobbie-img" src="traveling.png"/></label>
@@ -92,7 +94,7 @@
         </div>
         <div id="step3" style="display: none;">
             <div class="form-group">
-                <label for="hobbies">Hobbies:</label>
+                <h2 class="interestslabel"><img src="hobbies1.png"></h2>
                 <div>
                     <input type="checkbox" id="reading" name="hobbies" value="Reading">
                     <label for="reading"><img src="reading.png" class="interest-img" /></label>

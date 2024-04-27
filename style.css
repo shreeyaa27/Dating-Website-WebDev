@@ -36,9 +36,9 @@ h1 {
 .form-group {
     margin-top: 20px;
     margin-bottom: 15px;
-    display: flexbox;
+    /* display: flexbox; */
     align-items: center;
-    text-align: center;
+    text-align: right;
 }
 .gender {
     display: inline-block;
@@ -131,4 +131,11 @@ input{
 .interests2{
     display: flex;
     justify-content: space-between;
+}
+
+.interestslabel{
+    margin-left: 200px;
+    
+    width: 100px;
+    
 }
