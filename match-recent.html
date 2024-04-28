@@ -6,6 +6,7 @@
     <title>Match Display</title>
 </head>
 <body>
+    <button type="submit" id="logout-btn">Logout</button>
     <div id="found">
 
     </div>
@@ -13,23 +14,9 @@
     <div id="match-info">
         <!-- Match information will be displayed here -->
     </div>
-    <script src="https://smtpjs.com/v3/smtp.js">
-    </script>
+    
     <script>
-        function sendEmail() {
-            Email.send({
-                Host: "smtp.gmail.com",
-                Username: "sender@email_address.com",
-                Password: "Enter your password",
-                To: 'receiver@email_address.com',
-                From: "sender@email_address.com",
-                Subject: "Sending Email using javascript",
-                Body: "Well that was easy!!",
-            })
-                .then(function (message) {
-                    alert("mail sent successfully")
-                });
-        }
+        
         swipePage = () => {
             window.location.href = 'swipe4filter.html';  //redirect to swipe2.html
         }
@@ -41,13 +28,15 @@
         if (perfectMatch === 0) {
             // If no perfect match is found, display a message
             const matchInfoContainer = document.getElementById('match-info');
-            matchInfoContainer.innerHTML = `<h1 style="color: yellow;" >Sorry, no match found for you...</h1>`;
+            matchInfoContainer.innerHTML = `<h1 style="color: yellow;" >Sorry, no match found for you...</h1><br>
+            <button type="button" id="button1" onclick="swipePage()">Swipe profiles</button>`;
+
             matchInfoContainer.classList.add('no-match-background');  //add the class no-match-background to the matchInfoContainer
         } 
         else {
             // Populate the HTML with match information
             const foundcontainer=document.getElementById('found'); //get the element with id found
-            foundcontainer.innerHTML=`<h1 class="heading">Hey, you got a match!!</h1>`   //display the message in the foundcontainer
+            foundcontainer.innerHTML=`<h1>Hey, you got a match!!</h2>`   //display the message in the foundcontainer
             const matchInfoContainer = document.getElementById('match-info');
             matchInfoContainer.classList.add('match-background'); 
             //display the match information in the matchInfoContainer
@@ -62,7 +51,7 @@
                 <p><b>Hobbies:</b> ${perfectMatch.Hobbies}</p>
                 <button type="button" id="button1" onclick="swipePage()">Swipe through other profiles</button>
                 </div>
-                <div class="heart"><img id="match-photo" src="${perfectMatch.Photo}" alt="Match Photo"> <button id="button2" onclick="sendEmail()" >Send Email</button></div>
+                <div class="heart"><img id="match-photo" src="${perfectMatch.Photo}" alt="Match Photo"> <button id="button2" onclick="window.location.assign('email.html')" >Send Email</button></div>
                 
             `;
         } 
@@ -71,9 +60,8 @@
 </body>
 <style>
     body{
-        
-        background-image: url("matchnewbg.png");
-        background-size: 100%;
+        background-image: url("matchtry1.png");
+        background-size: 100% 100%;
         background-repeat: no-repeat;
     }
     @keyframes blink {
@@ -90,6 +78,43 @@
     }
     #name{
         font-size: larger;
+    }
+    #button1{
+        padding: 10px 20px 10px 20px;
+        height: 40px;
+        width: 200px;
+        background-color: #e9d817;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        display: block;
+       
+        
+    }
+    #logout-btn {
+        /* padding: 10px 10px;
+        height: 40px;
+        width: 160px;
+        background-color: rgb(203, 78, 78);
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        display: block;
+        margin-left: 0%;
+        margin-top: 20px; */
+            display: inline-block;
+            width: 75px;
+            height: 75px;
+            border-color: white;
+            border-radius: 50%;
+            background-color: rgb(9, 92, 30);
+            color: white;
+            font-size: 15px;
+            text-align: center;
+            line-height: 50px; /* Vertically center text */
+            text-decoration: none; /* Remove default link styling */
     }
     #match-info {
         margin-left: 25%;
