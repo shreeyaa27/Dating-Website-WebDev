@@ -20,7 +20,7 @@
             </div>
             <!-- Filter section -->
             <div id="filter-options" style="display: none;">
-                <h3>Filter Profiles</h3>
+                <h3><center>Filter Profiles</center></h3>
                 <label for="age-filter">Age Limit:</label>
                 <input type="number" id="age-filter" placeholder="Enter max age"><br>
                 <h4>Gender:</h4>
@@ -37,10 +37,11 @@
                 <label for="interest-music">Music</label>
                 <input type="radio" id="interest-travel" name="interest" value="Traveling">
                 <label for="interest-travel">Traveling</label>
-                <input type="radio" id="interest-art" name="interest" value="Art">
-                <label for="interest-travel">Art</label><br>
                 <input type="radio" id="literature" name="interest" value="Literature">
-                <label for="interest-travel">Literature</label>
+                <label for="interest-travel">Literature</label><br>
+                <input type="radio" id="interest-art" name="interest" value="Art">
+                <label for="interest-travel">Art</label>
+                
                 <input type="radio" id="interest-movies" name="interest" value="Technology">
                 <label for="interest-travel">Technology</label>
                 <input type="radio" id="interest-fashion" name="interest" value="Fashion">
@@ -53,13 +54,13 @@
                 <input type="radio" id="hobby-reading" name="hobby" value="Reading">
                 <label for="hobby-reading">Reading</label>
                 <input type="radio" id="hobby-instrument" name="hobby" value="Playing musical instruments">
-                <label for="hobby-gaming">Playing musical instruments</label>
-                <input type="radio" id="hobby-cooking" name="hobby" value="Cooking">
-                <label for="hobby-cooking">Cooking</label><br>
-                <input type="radio" id="hobby-photography" name="hobby" value="Photography">
-                <label for="hobby-photography">Photography </label>
+                <label for="hobby-gaming">Playing musical instruments</label><br>
                 <input type="radio" id="hobby-cooking" name="hobby" value="Cooking">
                 <label for="hobby-cooking">Cooking</label>
+                <input type="radio" id="hobby-photography" name="hobby" value="Photography">
+                <label for="hobby-photography">Photography </label>
+                <!-- <input type="radio" id="hobby-cooking" name="hobby" value="Cooking">
+                <label for="hobby-cooking">Cooking</label> -->
                 <input type="radio" id="hobby-gardening" name="hobby" value="Gardening">
                 <label for="hobby-gardening">Gardening</label> <br>
                 <input type="radio" id="hobby-watching" name="hobby" value="Watching YouTube/Instagram">
@@ -217,7 +218,7 @@
 <style>
     /* Add your CSS styles here */
     body{
-        background-image: url(swipetry3.png);
+        background-image: url(swipetry4.png);
         background-size: 100%;
         background-repeat: no-repeat;
         
@@ -225,6 +226,7 @@
     .container {
         display: flex;
         flex-direction: row;
+        
     }
 
     /* Swipe container */
@@ -255,6 +257,12 @@
         margin: 20px;
         overflow: hidden;
         transition: transform 0.3s ease-in-out;
+    }
+    #filter-options{
+        background-color: #fff;
+        /* width: 375px; */
+        
+        opacity: 0.7;
     }
 
     .current-card {
@@ -297,6 +305,13 @@
         margin: 0;
         font-size: 1rem;
         color: #584c4c;
+    }
+    #buttontypes{
+        margin-left: 60px;
+    }
+    #apply-filter{
+        margin-top: 10px;
+        margin-left: 100px;
     }
 </style>
 
