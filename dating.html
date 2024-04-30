@@ -13,7 +13,9 @@
     <div class="container">
         
         <div id="step1">
+            <button id="logout-btn" onclick="logout()">Logout</button>
             <h1 class="blink">Provide details to find a Match!!</h2>
+                
                 <form id="dating-form">
                     <div class="form-group">
                         <label for="roll-number">IITB Roll Number:</label>
@@ -24,8 +26,14 @@
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="year-of-study">Year of Study:</label>
-                        <input type="number" id="year-of-study" name="year-of-study" required min="1">
+                        <label for="year">Year of Study:</label>
+                        <select id="year" name="year">
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="age">Age:</label>
@@ -53,7 +61,7 @@
                         <input type="file" id="photo" name="photo" accept="image/*" required>
                     </div>
 
-                    <button id="nextButton" type="button" onclick="nextStep('step1', 'step2')">Next</button>
+                    <button type="button" onclick="nextStep('step1', 'step2')">Next</button>
         </div>
         
         <div id="step2" style="display: none;">
@@ -103,7 +111,7 @@
                     <label for="cooking"><img src="cooking.png" class="interest-img" /></label>
 
                     <input type="checkbox" id="coding" name="hobbies" value="Coding">
-                    <label for="coding"><img src="coding.png" class="interest-img" />g</label>
+                    <label for="coding"><img src="coding.png" class="interest-img" /></label>
 
                     <input type="checkbox" id="gardening" name="hobbies" value="Gardening">
                     <label for="gardening"><img src="gardening.png" class="interest-img" /></label>
@@ -128,8 +136,8 @@
 
             <div class="submit-btn">
             <button type="button" onclick="previousStep('step3', 'step2')">Previous</button>
-            <button type="submit" onclick="validateForm()">Submit</button>
-            <!-- <button id="logout-btn">Logout</button> -->
+            <button type="button" onclick="validateForm()">Submit</button>
+            
             </form>
             </div>
         </div>

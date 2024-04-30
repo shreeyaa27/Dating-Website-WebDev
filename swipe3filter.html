@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swipe Profiles</title>
+
+    <style>
+        /* Add your CSS styles here */
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* Swipe container */
+        .swipe-container {
+            display: flex;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .age,
+        .gender {
+            flex-grow: 1;
+        }
+
+        /* Swipe card */
+        .card {
+            width: 80%;
+            /* Adjust as needed */
+            max-width: 500px;
+            height: 600px;
+            /* Adjust as needed */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .current-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Move current card to the center */
+        }
+
+        .next-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(-100%);
+            visibility: hidden;
+        }
+
+        /* Profile photo */
+        .profile-photo img {
+            position: a;
+            width: 100%;
+            height: 490px;
+        }
+
+        /* Profile details */
+        .profile-details {
+            padding: 20px;
+        }
+
+        /* Profile name */
+        .profile-details h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        /* Profile age */
+        .profile-details p {
+            margin: 0;
+            font-size: 1rem;
+            color: #584c4c;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <!-- Filter section -->
+            <h3>Filter Profiles</h3>
+            <label for="age-filter">Age Limit:</label>
+            <input type="number" id="age-filter" placeholder="Enter max age"><br>
+            <h4>Interests:</h4>
+            <input type="checkbox" id="interest-travel" value="Traveling">
+            <label for="interest-travel">Traveling</label><br>
+            <input type="checkbox" id="interest-sports" value="Sports">
+            <label for="interest-sports">Sports</label><br>
+            <input type="checkbox" id="interest-movies" value="Movies">
+            <label for="interest-movies">Movies</label><br>
+            <input type="checkbox" id="interest-music" value="Music">
+            <label for="interest-music">Music</label><br>
+            <input type="checkbox" id="interest-literature" value="Literature">
+            <label for="interest-literature">Literature</label><br>
+            <input type="checkbox" id="interest-technology" value="Technology">
+            <label for="interest-technology">Technology</label><br>
+            <input type="checkbox" id="interest-fashion" value="Fashion">
+            <label for="interest-fashion">Fashion</label><br>
+            <input type="checkbox" id="interest-art" value="Art">
+            <label for="interest-art">Art</label><br>
+            <h4>Hobbies:</h4>
+            <input type="checkbox" id="hobby-reading" value="Reading">
+            <label for="hobby-reading">Reading</label><br>
+            <input type="checkbox" id="hobby-cooking" value="Cooking">
+            <label for="hobby-cooking">Cooking</label><br>
+            <input type="checkbox" id="hobby-coding" value="Coding">
+            <label for="hobby-coding">Coding</label><br>
+            <input type="checkbox" id="hobby-gardening" value="Gardening">
+            <label for="hobby-gardening">Gardening</label><br>
+            <input type="checkbox" id="hobby-painting" value="Painting">
+            <label for="hobby-painting">Painting</label><br>
+            <input type="checkbox" id="hobby-watching" value="Watching YouTube/Instagram">
+            <label for="hobby-watching">Watching YouTube/Instagram</label><br>
+            <input type="checkbox" id="hobby-music" value="Playing musical instruments">
+            <label for="hobby-music">Playing musical instruments</label><br>
+            <input type="checkbox" id="hobby-photography" value="Photography">
+            <label for="hobby-photography">Photography</label><br>
+            <button id="apply-filter">Apply Filter</button>
+        </div>
+        <div>
+            <!-- Swipe container -->
+            <div id="swipe-container" class="swipe-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Select swipe container and buttons
+        const swipeContainer = document.querySelector('.swipe-container');
+        const applyFilterBtn = document.getElementById('apply-filter');
+
+        // Add event listener to apply filter button
+        applyFilterBtn.addEventListener('click', applyFilter);
+
+        // Function to apply filter
+        function applyFilter() {
+            // Get filter values
+            const maxAge = document.getElementById('age-filter').value;
+            const interests = [];
+            document.querySelectorAll('input[type="checkbox"][id^="interest-"]:checked').forEach(checkbox => {
+                interests.push(checkbox.value);
+            });
+            const hobbies = [];
+            document.querySelectorAll('input[type="checkbox"][id^="hobby-"]:checked').forEach(checkbox => {
+                hobbies.push(checkbox.value);
+            });
+
+            // Fetch data from students.json
+            fetch('students.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Filter profiles based on age, interests, and hobbies
+                    const filteredProfiles = data.filter(profile => {
+                        return (profile.Age <= maxAge) &&
+                            (interests.length === 0 || interests.some(interest => profile.Interests.includes(interest))) &&
+                            (hobbies.length === 0 || hobbies.some(hobby => profile.Hobbies.includes(hobby)));
+                    });
+
+                    // Create filtered cards
+                    createCards(filteredProfiles);
+                })
+                .catch(error => console.error('Error fetching or parsing data:', error));
+        }
+
+        // Function to create swipe cards
+        function createCards(data) {
+            // Clear existing cards
+            swipeContainer.innerHTML = '';
+
+            // Loop through data and create cards
+            data.forEach(profile => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                // Add content to card based on profile data
+                card.innerHTML = `
+                    <div class="profile-photo">
+                        <img src="${profile.Photo}" alt="Profile Photo">
+                    </div>
+                    <div class="profile-details">
+                        <h2>${profile.Name}</h2>
+                        <p class="profile-info">
+                            <span class="age">Age: ${profile.Age}</span>
+                            <span class="gender">Gender: ${profile.Gender}</span>
+                        </p>
+                        <p>Interests: ${profile.Interests.join(', ')}</p>
+                        <p>Hobbies: ${profile.Hobbies.join(', ')}
+                        <!-- Add more profile details as needed -->
+                    </div>
+                `;
+                swipeContainer.appendChild(card);
+            });
+        }
+
+        // Initial load: Show all profiles
+        applyFilter();
+
+    </script>
+
+</body>
+
+</html>

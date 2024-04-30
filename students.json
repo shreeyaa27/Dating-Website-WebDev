@@ -13,7 +13,7 @@
     {
         "IITB Roll Number": "2023019",
         "Name": "Sameer",
-        "Year of Study": "1rd",
+        "Year of Study": "1st",
         "Age": 18,
         "Gender": "Male",
         "Interests": ["Sports", "Technology","Movies"],
@@ -30,7 +30,7 @@
         "Interests": ["Traveling", "Sports", "Movies","Technology"],
         "Hobbies": ["Reading", "Watching YouTube/Instagram","Coding"],
         "Email": "satyam@example.com",
-        "Photo": "photos/aryan_sharma.png"
+        "Photo": "photos/mypicture.jpg"
     },
     {
         "IITB Roll Number": "2023002",

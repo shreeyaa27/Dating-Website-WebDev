@@ -1,17 +1,19 @@
-function nextStep(currentStepId, nextStepId) {
+
+function nextStep(currentStepId, nextStepId) { //to activate the next button
     document.getElementById(currentStepId).style.display = 'none';
     document.getElementById(nextStepId).style.display = 'block';
-} //CHANGED
-function previousStep(currentStepId, previousStepId) {
+} 
+function previousStep(currentStepId, previousStepId) { //to activate the previous button
     document.getElementById(currentStepId).style.display = 'none';
     document.getElementById(previousStepId).style.display = 'block';
-} //CHANGED
+} 
 function validateForm() {
     // Retrieve form inputs
     const rollNumber = document.getElementById('roll-number').value;
     const name = document.getElementById('name').value;
-    const yearOfStudy = parseInt(document.getElementById('year-of-study').value);
+    const yearOfStudy = document.getElementById('year').value;
     const age = parseInt(document.getElementById('age').value);
+    const email=document.getElementById('email').value;
     const gender = document.querySelector('input[name="gender"]:checked');
     const interests = document.querySelectorAll('input[name="interests"]:checked');
     const hobbies = document.querySelectorAll('input[name="hobbies"]:checked');
@@ -28,11 +30,7 @@ function validateForm() {
         return false;
     }
 
-    // Check if year of study is not a number or less than 1
-    if (isNaN(yearOfStudy) || yearOfStudy < 1 || yearOfStudy>5) {
-        alert('Please enter a valid year of study.');
-        return false;
-    }
+    
 
     // Check if age is not a number or less than 18
     if (isNaN(age) || age < 18) {
@@ -51,24 +49,32 @@ function validateForm() {
         alert('Please select at least one interest.');
         return false;
     }
-
+    
     // Check if at least one hobby is selected
     if (hobbies.length === 0) {
         alert('Please select at least one hobby.');
         return false;
     }
     // Form is valid, call searchForMatch function
+    
     searchForMatch();
     // Form is valid, allow submission
     return true;
 }
 
+
+
+
+function logout() { //to logout
+    localStorage.removeItem('perfectMatch');
+    window.location.href = '/login.html';
+}
 function searchForMatch() {
             // Get user-provided data
             const currentUser = {
                 rollNumber: document.getElementById('roll-number').value,
                 name: document.getElementById('name').value,
-                yearOfStudy: parseInt(document.getElementById('year-of-study').value),
+                yearOfStudy: document.getElementById('year').value,
                 age: parseInt(document.getElementById('age').value),
                 gender: document.querySelector('input[name="gender"]:checked').value,
                 interests: Array.from(document.querySelectorAll('input[name="interests"]:checked')).map(input => input.value),
@@ -157,6 +163,8 @@ function searchForMatch() {
         
                     // Display the match
                     console.log('Match found:', match.Name);
+                    // requestMatch();
                 })
                 .catch(error => console.error('Error fetching data:', error));
         }
+        

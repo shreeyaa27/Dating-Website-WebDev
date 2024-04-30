@@ -63,6 +63,16 @@ label {
 #interestForm{
     display: none;
 }
+#logout-btn{
+    margin-left: 98% ;
+}
+#year{
+    width: 170px;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 18px;
+}
 #nextButton{
     padding: 10px 20px;
         background-color: #f30a73;
@@ -74,7 +84,7 @@ label {
         margin-left: 17px;
         margin-right: 17px;
         align-self: center;
-    position: absolute;
+
 
 }
 .hobbie-img{

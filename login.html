@@ -7,6 +7,7 @@
     
 </head>
 <body>
+    <!--creating a form to take username and password as input-->
     <div class="login-container">
         <div id="player">
             <audio autoplay hidden>
@@ -14,7 +15,7 @@
                         If you're reading this, audio isn't supported. 
             </audio>
         </div>
-        
+        <h2 style="text-align: center;">Login</h2>
         <form id="login-form">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -24,31 +25,34 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="button" onclick="login()" >Login</button>
-            <a href="forgot.html">Forgot Password?</a>
+            <button type="button" onclick="login()">Login</button>
+            <a href="forgot.html">Forgot Password?</a><!--link to forgot password page-->>
+            <a href="createprofile.html">Create Profile</a> <!--Link to add new profile for new users CUSTOMISATION-->> 
         </form>
-        <p id="error-message" class="error-message"></p>
+        <p id="error-message" class="error-message"></p> <!--display error message if login is unsuccessful-->
     </div>
 
     
 </body>
 <style>
     body {
-        background-position: top;
-        transition: background-image 0.5s ease;
-        background-size: cover;
-        font-family: 'Brush Script MT', cursive;
+        background-position: top;  
+        transition: background-image 0.5s ease;     /*transition effect for background image*/ 
+        background-size: cover;                    /*cover the entire background*/
+        font-family: 'Brush Script MT', cursive;     
         background-color: #f0f0f0;
         margin: 0;
         padding: 0;
 
     }
-
+    a:hover{
+        font-size: 30px; /*increase the font size on hover*/
+    }
     .login-container {
-        width: 500px;
-        margin-left: 30%;  <!--added line-->
-        margin: 100px auto;
-        margin-top: 100px;
+        width: 500px;   /*width of the form*/
+        margin-left: 30%;  /*aligning the form to center*/
+        margin: 100px auto;  
+        margin-top: 100px; 
         font-size: 25px;
         
         padding: 20px;
@@ -100,15 +104,20 @@
         font-size: 14px;
         margin-top: 10px;
     }
+    a {
+        text-decoration: none;
+        color: #f30a73;
+        margin-left: 15%;
+    }
 
 </style>
 <script>
     function login() {
-    // Get the username and password from the input fields
+    // Gets the username and password from the input fields
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Fetch the JSON file containing user data
+    // Fetching the JSON file containing user data
     fetch('login.json')
         .then(response => {
             if (!response.ok) {
@@ -117,11 +126,11 @@
             return response.json();
         })
         .then(data => {
-            // Check if the provided username and password match any user in the JSON data
+            // Checks if the provided username and password match any user in the JSON data
             const user = data.find(user => user.username === username && user.password === password);
 
-            if (user) {
-                // Redirect to the dating.html page if login is successful
+            if (user) {    
+                // Redirects to the dating.html page if login is successful
                 window.location.href = 'dating.html';
             } else {
                 // Display an error message or perform any other action for unsuccessful login
@@ -138,10 +147,11 @@ const images = [
     'backgroundtry2.avif',
     'backgroundtry6.avif',
     'backgroundtry5.jpeg'
-    // ADDED NEW IMAGES
+    
+    // Add more image URLs as needed
 ];
 
-// Function to set a random background image
+// Function to set a random background image.  
 function setRandomBackground() {
     const randomIndex = Math.floor(Math.random() * images.length);
     const imageUrl = images[randomIndex];
@@ -151,7 +161,7 @@ function setRandomBackground() {
 // Set an initial background when the page loads
 setRandomBackground();
 
-// Change the background image every 5 seconds (adjust the interval as needed)
+// Change the background image every 2 seconds (adjust the interval as needed)
 setInterval(setRandomBackground, 2000);
 
 

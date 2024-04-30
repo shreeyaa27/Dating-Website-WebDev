@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,11 +6,11 @@
     <title>Password Recovery page</title>
 </head>
 <body>
-    <h2>Password Recovery</h2>
+    <h2>Password Recovery 🩷 </h2>
     <form id="recovery-form">
         <div>
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+           <input type="text" id="username" name="username" required>
         </div>
         <p id="question-container">
             <!-- Secret question will be inserted here dynamically -->
@@ -21,9 +21,9 @@
         <div id="answer-container">
             <!--input box for the answer-->
         </div>
-        
-        <button type="button" onclick="getSecretQuestion()" id="getquestionbutton">Get Secret Question</button>
-        <a href="login.html">Back to the Login page</a>
+
+        <button type="button" onclick="getSecretQuestion()" id="getquestionbutton">Get Secret Question</button><br ><!-- When button is clicked it implements getSecretQuestion()-->
+        <a href="login.html">Back to the Login page</a><!--link to login page-->
         <div id="passwordbutton"></div>
     </form>
     </form>
@@ -32,7 +32,7 @@
 <script>
     function getSecretQuestion() {
     const username = document.getElementById('username').value;
-    
+    // Fetch data from login.json
     fetch('login.json')
         .then(response =>  {
             if (!response.ok) {
@@ -41,11 +41,11 @@
             return response.json();
         })
         .then(data => {
-            const user = data.find(user => user.username === username);
+            const user = data.find(user => user.username === username);//finds the user with the given username
 
-
+            // If user is found, display the secret question
             if (user) {
-                
+
                 const questionContainer = document.getElementById('question-container');
                 questionContainer.innerHTML = `<label for="secret_question">${user.secret_question}</label>`;
                 const answercontainer=document.getElementById("answer-container");
@@ -55,7 +55,7 @@
                 passwordbutton1.innerHTML=`<button type="button" onclick="recoverPassword()">Recover Password</button>`;
                 const questionbutton1=document.getElementById("getquestionbutton");
                 questionbutton1.remove();
-            } else {
+            } else {  // If user is not found, display an error message
                 document.getElementById('question-container').textContent = 'User not found! Try with a different username.';
                 const usernameInput = document.getElementById('username');
 
@@ -63,70 +63,63 @@
                 usernameInput.value = '';
             }
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => console.error('Error fetching data:', error)); // Log any errors
 }
 
-function recoverPassword() {
+// Function to recover password
+function recoverPassword() {  
     const username = document.getElementById('username').value;
     const answer = document.getElementById('answer').value;
-
+    // Fetch data from login.json
     fetch('login.json')
-        .then(response => response.json())
+        .then(response => response.json())   // Parse the JSON data
         .then(data => {
-            const user = data.find(user => user.username === username);
+            const user = data.find(user => user.username === username); // Find the user with the given username
 
             if (user && user.secret_answer === answer) {
-                alert(`Your password is: ${user.password}`);
+                alert(`Your password is: ${user.password}`);  // Display the password if the answer is correct
             } else {
-                alert('Incorrect answer or user not found');
-                
+                alert('Incorrect answer or user not found');  // Display an error message if the answer is incorrect
+
             }
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => console.error('Error fetching data:', error));  // Log any errors
 }
 </script>
 
 <style>
     body {
-        background-image: url(forgotimage.jpg);
+        background-image: url(background_forgotp.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    margin: 0;
+    margin-top: 250px;
     padding: 0;
     }
-    #username{
-        
-        border-radius: 10px ;
-    }
-    #answer{
-        border-radius: 10px;
-    }
-    #question-container{
-        border-radius: 10px;
-    }
+
     h2 {
         text-align: center;
-        margin-left: 8%;
+        margin-left: 15%;
         margin-bottom: 20px;
+        font-family: 'Courier New', Courier, monospace;
     }
-    p{
-        font-size: larger;
-    }
+
     #recovery-form {
         width: 25%;
         margin-left: 43%;
         margin-right: auto;
-        
-        background-color: rgba(221, 160, 221, 0.7);
+
+        font-family: 'Times New Roman', Times, serif;
+        background-color: rgba(221, 196, 160, 0.7);
         padding: 20px;
-        border-radius: 5px;
+        border-radius: 20px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     label {
         display: block;
         margin-bottom: 5px;
-
     }
 
     input[type="text"] {
@@ -138,12 +131,15 @@ function recoverPassword() {
     }
 
     button {
-        width: 100%;
+
+        margin-left: 100px;
+        margin-bottom: 20px;
+        width: 50%;
         padding: 10px;
         background-color: #007bff;
         color: #fff;
         border: none;
-        border-radius: 7px;
+        border-radius: 3px;
         cursor: pointer;
     }
 
